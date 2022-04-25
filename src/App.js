@@ -1,18 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle'
-import { Button } from 'bootstrap/dist/js/bootstrap.bundle';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Contact from './pages/Contact';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="logo" />
-        
-      </header>
-      <button className="btn-primary">Hello bootstrap </button>
+    <div>
     
+    <Header/>
+    <Home/>
+    
+    <Footer/>
+
     </div>
   );
 }
