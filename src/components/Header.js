@@ -1,6 +1,7 @@
 import logo from '../logo.svg';
 import { NavLink } from 'react-router-dom';
 
+
 const Header = () => {
     return(
         <header>
@@ -13,7 +14,7 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                        <NavLink className="nav-link"  to="/">Home</NavLink>
+                        <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
                         <NavLink className="nav-link" to="Portfolio">Portfolio</NavLink>

@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react"
+import Card from "../components/Card"
+import Pagination from "../components/Pagination"
 
 const Portfolio = () => {
 
+    let [page, setPage] = useState(1);
+
     let [joke, setJoke] = useState('');
+
+    let [gallery, setGallery] = useState([]);
     
     const loadJoke = () => {
         fetch("https://api.chucknorris.io/jokes/random").then(response => response.json()).then(data => {
@@ -11,27 +17,63 @@ const Portfolio = () => {
         })
     }
 
-    useEffect(()=>loadJoke(),[]);
+    const nextPage = (page) => {
+        setPage(page);
+    }
+
+    const loadPics = () => {
+        fetch("https://picsum.photos/v2/list?page="+page+"&limit=9").then(response => response.json()).then(data => {
+            setGallery(data)
+            console.log(data)
+        })
+    }
+
+    useEffect(()=>loadJoke, []);
+    useEffect(()=>loadPics, [page]);
 
 
     return ( 
     
         <section >
-        <div class = "container-fluid" >
-            <div class = "row" >
-                <h1> Portfolio </h1> 
-                <button class="btn text-white bg-dark" onClick={loadJoke}>Chuck</button>
-                <p>{ joke }</p>
-            </div> 
-            <div class = "row" >
-                <div className = "col" >
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi hendrerit massa ac ullamcorper congue. Duis mollis orci elementum faucibus volutpat. Nullam pellentesque pellentesque tempor. Maecenas maximus euismod aliquet. Etiam eu faucibus mauris, vel tincidunt nisl.
-                    </p> 
-                </div> 
-            </div> 
-        </div>"
+            <div className= "container-fluid" >
+                <div className= "row" >
+                    <h1> Portfolio </h1> 
+                    <button className="btn text-white bg-dark" onClick={loadJoke}>Chuck</button>
+                    <p>{ joke }</p>
+                </div>
+                <div className= "row" >
+                    <div className="col">
+                        <Pagination page={page} nextPage={nextPage} />
+                    </div>
+                </div>
+                <div className= "row" >
+                        {
+                        gallery.map(
+                            pic => {
+                                let source = `https://picsum.photos/id/${pic.id}/640/380`;
+                                let title = `Picture by ${pic.author}`;
+                                let id = pic.id;
+                                let width = pic.width;
+                                let height = pic.height;
+                                let dim = {'width': width, 'height': height};
 
+                                return (
+                                    <Card key={id} source={source} title={title} dim={dim} />
+                                        )
+                                    }
+
+                                )
+                        }
+                    
+                    
+                </div> 
+                <div className= "row" >
+                    <div className="col">
+                        <Pagination page={page} nextPage={nextPage} />
+                    </div>
+                </div>
+
+            </div>
         </section>
     )
     
