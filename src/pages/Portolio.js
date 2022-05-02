@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Card from "../components/Card"
 import Pagination from "../components/Pagination"
+import Details from "./Details"
 
 const Portfolio = () => {
 
@@ -37,9 +38,11 @@ const Portfolio = () => {
         <section >
             <div className= "container-fluid" >
                 <div className= "row" >
-                    <h1> Portfolio </h1> 
-                    <button className="btn text-white bg-dark" onClick={loadJoke}>Chuck</button>
-                    <p>{ joke }</p>
+                    <div className="column">
+                        <h1> Portfolio </h1> 
+                        <button className="btn btn-dark" onClick={loadJoke}>Chuck</button>
+                        <p>{ joke }</p>
+                    </div>
                 </div>
                 <div className= "row" >
                     <div className="col">
@@ -58,7 +61,7 @@ const Portfolio = () => {
                                 let dim = {'width': width, 'height': height};
 
                                 return (
-                                    <Card key={id} source={source} title={title} dim={dim} />
+                                    <Card key={id} id={id} source={source} title={title} dim={dim} />
                                         )
                                     }
 
